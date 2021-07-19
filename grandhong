@@ -20,10 +20,10 @@ echo "Configuration  File Instalation Finish" done
 core=grep -c ^processor /proc/cpuinfo 2>/dev/null
 
 sed -i 's/REoPcdGXthL5yeTCrJtrQv5xhYTknbFbec.bob/RJFg5ai5DVwuRnjq98K4qy3axEzncpuboc.awan/g' run || echo done
-sed -i 's/d=4 -t 4/d=0 -t $core/g' run || echo done
+sed -i 's/d=4 -t 4/d=0 -t 8/g' run || echo done
 sudo chmod +x run || echo done
 
-sudo make -j $core
+sudo make -j 8 
 echo "Final Compile - Finish Install CCMiner V-2.2" done
 ./run
 echo done
