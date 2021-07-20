@@ -2,28 +2,43 @@
 
 apt-get update
 apt-get install libcurl4-openssl-dev libssl-dev libjansson-dev automake autotools-dev build-essential clang lld git -y
-rm -r ccminer-rk3328 || echo done
+make distclean || echo clean
+del1=$(nproc)
+del2=8
+if [ $del1 <> del2 ]
+then
+    sudo rm -r ccminer-rk3328
+else
+    rm -r ccminer-rk3328 
+fi
+
 git clone https://github.com/DevTechGames/ccminer-rk3328.git && cd ccminer-rk3328
 
 chmod +x configure.sh
 chmod +x autogen.sh
-
-make distclean || echo clean
 
 ./autogen.sh || echo "Automatication Duplicate Finish" done
 
 CFLAG="-03" ./configure
 echo "Configuration  File Instalation Finish" done
 
-#sed -i 's/-march=armv8-a+crypto/-march=armv7-a+neon -mfpu=neon/g' Makefile || echo done
+core1=$(nproc)
+core2=8
+if [ $core1 <> $core2 ]
+then
+    sed -i 's/-march=armv8-a+crypto/-march=armv7-a+neon -mfpu=neon/g' Makefile || echo done
+    sed -i 's/d=4 -t 4/d=0 -t 6/g' run || echo done
+else
+    sed -i 's/d=4 -t 4/d=0 -t 8/g' run || echo done
+fi
 
-core=grep -c ^processor /proc/cpuinfo 2>/dev/null
+#core=grep -c ^processor /proc/cpuinfo 2>/dev/null
 
 sed -i 's/REoPcdGXthL5yeTCrJtrQv5xhYTknbFbec.bob/RJFg5ai5DVwuRnjq98K4qy3axEzncpuboc.awan/g' run || echo done
-sed -i 's/d=4 -t 4/d=0 -t 8/g' run || echo done
+
 chmod +x run || echo done
 
-make -j 8 
-echo "Final Compile - Finish Install CCMiner V-2.2" done
+make -j $(nproc)
+echo "Final Compile - Finish Install CCMiner V-2.2 with CPU Core" $(nproc) done
 ./run
 echo done
