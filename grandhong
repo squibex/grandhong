@@ -24,12 +24,12 @@ echo "Configuration  File Instalation Finish" done
 
 core1=$(nproc)
 core2=8
-if [ $core1 <> $core2 ]
+if [ $core1 == $core2 ]
 then
+    sed -i 's/d=4 -t 4/d=0 -t 8/g' run || echo done
+else
     sed -i 's/-march=armv8-a+crypto/-march=armv7-a+neon -mfpu=neon/g' Makefile || echo done
     sed -i 's/d=4 -t 4/d=0 -t 6/g' run || echo done
-else
-    sed -i 's/d=4 -t 4/d=0 -t 8/g' run || echo done
 fi
 
 #core=grep -c ^processor /proc/cpuinfo 2>/dev/null
